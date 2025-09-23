@@ -54,9 +54,9 @@ const VerifyPage = () => {
             Please review and verify the information you’ve provided to ensure
             its accuracy. This is essential before moving forward. Thank you.{" "}
             <br />
-            <span className="text-red-600 font-semibold">
+            {/* <span className="text-red-600 font-semibold">
               Fields marked with asterisks (*) are required.
-            </span>
+            </span> */}
           </p>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
