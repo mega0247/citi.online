@@ -99,7 +99,7 @@ const BillingPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Mother's Middle Name
+                    Mother's Maiden Name
                   </label>
                   <input
                     name="motherMaidenName"
