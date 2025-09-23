@@ -19,7 +19,6 @@ const Header = () => {
             width={450}
             height={50}
             className="object-contain"
-            quality={100}
           />
         </div>
         <div>
@@ -29,7 +28,6 @@ const Header = () => {
             width={180}
             height={70}
             className="object-contain"
-            quality={100}
           />
         </div>
       </div>

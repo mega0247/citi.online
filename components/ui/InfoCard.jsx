@@ -12,7 +12,6 @@ const InfoCard = ({ subTitle, title, image, details }) => {
           width={370}
           height={210}
           className="object-contain rounded-md"
-          quality={100}
         />
         <h1 className="text-[24px] font-extrabold text-sec pt-2 pb-3">
           {title}

@@ -23,7 +23,6 @@ const SectionCard = ({
           width={545}
           height={310}
           className="object-contain rounded-2xl w-full"
-          quality={100}
         />
       </div>
       <div className="w-1/2">

@@ -52,7 +52,6 @@ const Footer = () => {
             width={70}
             height={70}
             className="object-contain"
-            quality={100}
           />
         </div>
       </section>
@@ -64,7 +63,6 @@ const Footer = () => {
           width={1200}
           height={200}
           className="object-contain"
-          quality={100}
         />
       </div>
 
@@ -111,7 +109,6 @@ const Footer = () => {
           width={80}
           height={80}
           className="object-contain ml-[-40px]"
-          quality={100}
         />
       </div>
     </footer>

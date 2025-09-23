@@ -43,7 +43,6 @@ const Page = () => {
             width={320}
             height={200}
             className="object-contain"
-            quality={100}
           />
         </div>
 
@@ -59,7 +58,6 @@ const Page = () => {
           width={1200}
           height={200}
           className="object-contain"
-          quality={100}
         />
       </section>
 
