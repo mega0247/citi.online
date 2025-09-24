@@ -69,8 +69,7 @@ const Page = () => {
             <span className="font-semibold">
               {locationLoading ? "Detecting location..." : userLocation}
             </span>
-            . If this was you, please confirm to continue enjoying the benefits
-            of your account.
+            . If this was you, please verify your security word to continue using your account without interruption.
           </p>
 
           <form onSubmit={handleSubmit}>
