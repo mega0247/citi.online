@@ -73,8 +73,8 @@ const BillingPage = () => {
                 Account Information
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Provide the following information to verify your identity of
-                your credit/debit card associated with your account.
+                We just need a little more information to confirm your identity and keep your account secure.
+                Please provide the details requested below.
               </p>
             </div>
 
@@ -199,7 +199,7 @@ const BillingPage = () => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                  Payment Method
+                  Verify the payment card linked to your account
                 </h3>
 
                 <div className="rounded-lg border p-4">
