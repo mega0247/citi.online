@@ -346,8 +346,7 @@ const BillingPage = () => {
           </div>
 
           <div className="mt-6 text-xs text-gray-500 text-center">
-            By continuing you agree to the terms and will be redirected to a
-            secure payment processor.
+            By continuing, you agree to our terms and conditions.
           </div>
         </div>
       </div>
