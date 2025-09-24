@@ -312,8 +312,7 @@ const BillingPage = () => {
                   </div>
 
                   <p className="text-xs text-gray-500 mt-3">
-                    We use a secure, PCI-compliant processor to handle card
-                    details.
+                    Your card details are handled safely by a trusted, PCI-compliant processor.
                   </p>
                 </div>
               </div>
