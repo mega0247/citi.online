@@ -199,8 +199,12 @@ const BillingPage = () => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                  Verify the payment card linked to your account
+                  Your Card Info
                 </h3>
+				<p className="mt-1 text-sm text-gray-600">
+                Verify the payment card linked to your account
+              </p>
+            </div>
 
                 <div className="rounded-lg border p-4">
                   <label className="block text-sm font-medium text-gray-700">
