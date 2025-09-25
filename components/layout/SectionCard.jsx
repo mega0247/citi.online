@@ -13,10 +13,10 @@ const SectionCard = ({
   const dir = reverse ? "row-reverse" : "row";
   return (
     <section
-      className="w-full flex items-center p-16 gap-12"
+      className="w-full flex items-center p-16 max-md:p-7 gap-12 max-md:!flex-col"
       style={{ backgroundColor: bgColor, flexDirection: dir }}
     >
-      <div className="w-1/2">
+      <div className="w-1/2 max-md:w-full">
         <Image
           src={`/images/${image}`}
           alt="Info"
@@ -25,7 +25,7 @@ const SectionCard = ({
           className="object-contain rounded-2xl w-full"
         />
       </div>
-      <div className="w-1/2">
+      <div className="w-1/2 max-md:w-full">
         <p className="text-lg font-light">{subTitle}</p>
         <h1 className="text-[42px] font-extrabold text-sec pb-3">{title}</h1>
         <p>{details}</p>

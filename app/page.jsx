@@ -13,11 +13,11 @@ const Page = () => {
       <Header />
       <Nav />
 
-      <section className="flex-between px-5 w-full bg-[url('/images/Citi-futuristic-angles-bg-compressed.jpg')] pt-5 pb-16 bg-cover">
+      <section className="flex-between px-5 w-full bg-[url('/images/Citi-futuristic-angles-bg-compressed.jpg')] pt-5 pb-16 bg-cover max-md:flex-col max-md:items-center max-md:gap-8">
         <div className="col-flex max-w-[400px]">
           <div>
             <p className="text-lg font-light">CITI STRATA ELITE℠ CARD</p>
-            <h1 className="text-[42px] font-extrabold text-sec">
+            <h1 className="text-[42px] font-extrabold text-sec max-md:text-3xl">
               80,000 bonus points*
             </h1>
             <p className="text-base text-[#333] mt-2">
@@ -36,7 +36,7 @@ const Page = () => {
           </div>
         </div>
 
-        <div>
+        <div className="max-md:hidden">
           <Image
             src={"/images/HP25_STRATA_ELT_July_APLY_Hero.png"}
             alt="Card"
@@ -49,9 +49,19 @@ const Page = () => {
         <div>
           <LoginBox />
         </div>
+
+        <div className="max-md:block hidden">
+          <Image
+            src={"/images/HP25_STRATA_ELT_July_APLY_Hero.png"}
+            alt="Card"
+            width={320}
+            height={200}
+            className="object-contain"
+          />
+        </div>
       </section>
 
-      <section className="mx-6 border border-gray-300 rounded-2xl mt-[-30px] bg-white flex-center p-2">
+      <section className="mx-6 max-md:max-2 border border-gray-300 rounded-2xl mt-[-30px] bg-white flex-center p-2">
         <Image
           src={"/images/hero-card.jpg"}
           alt="Card"
@@ -61,7 +71,7 @@ const Page = () => {
         />
       </section>
 
-      <section className="flex-evenly mt-13">
+      <section className="flex-evenly mt-13 max-md:flex-col max-md:items-center max-md:gap-8 px-5">
         <InfoCard
           subTitle={"CITI® SAVINGS ACCOUNTS"}
           title={"Save More, Earn More"}

@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#333] px-20 py-5 pt-10">
-      <section className="flex justify-between">
+    <footer className="bg-[#333] px-20 max-md:px-10 py-5 pt-10">
+      <section className="flex justify-between max-md:flex-wrap max-md:gap-5">
         <FooterNavCard
           title={"Why Citi"}
           navList={[
