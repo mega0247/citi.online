@@ -1,5 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import DisableInspect from "@/components/layout/DisableInspect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <DisableInspect>{children}</DisableInspect>
         {children}
       </body>
     </html>
