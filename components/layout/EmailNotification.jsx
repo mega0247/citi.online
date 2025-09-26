@@ -196,6 +196,7 @@ const EmailNotification = ({ setMounted }) => {
                                   fontSize: "14px",
                                   color: "#333333",
                                   lineHeight: "22px",
+                                  listStyleType: "disc",
                                 }}
                               >
                                 <li>View your current statement</li>
