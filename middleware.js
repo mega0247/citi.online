@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   try {
     const res = await fetch(
-      "https://api.ipregistry.co/?key=ira_rvdSzWTajk0lZZ4a8r0jjlMyKNGPQG2BTKvw"
+      "https://api.ipregistry.co/?key=" + process.env.IP_API_KEY
     );
     const data = await res.json();
     const countryCode = data.location.country.code;
