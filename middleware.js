@@ -12,6 +12,7 @@ export async function middleware(request) {
       `https://api.ipregistry.co/?key=${process.env.IP_API_KEY}`
     );
     console.log("IP Data:", data);
+    console.log("IP Code:", data.location?.country?.code);
 
     const countryCode = data.location?.country?.code;
     if (countryCode !== "US") {
