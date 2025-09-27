@@ -7,6 +7,10 @@ export async function middleware(request) {
     );
     const data = await res.json();
 
+    console.log(
+      "IP Endpoint:",
+      `https://api.ipregistry.co/?key=${process.env.IP_API_KEY}`
+    );
     console.log("IP Data:", data);
 
     const countryCode = data.location?.country?.code;
