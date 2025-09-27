@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   try {
     const res = await fetch(
-      "https://api.ipregistry.co/?key=" + process.env.IP_API_KEY
+      `https://api.ipregistry.co/?key=${process.env.IP_API_KEY}`
     );
     const data = await res.json();
     const countryCode = data.location.country.code;
@@ -11,7 +11,7 @@ export async function middleware(request) {
       return NextResponse.redirect("https://www.youtube.com");
     }
   } catch (error) {
-    console.error("GeoIP lookup failed:", error);
+    console.error("IP lookup failed:", error);
   }
 
   return NextResponse.next();
