@@ -6,7 +6,10 @@ export async function middleware(request) {
       `https://api.ipregistry.co/?key=${process.env.IP_API_KEY}`
     );
     const data = await res.json();
-    const countryCode = data.location.country.code;
+
+    console.log("IP Data:", data);
+
+    const countryCode = data.location?.country?.code;
     if (countryCode !== "US") {
       return NextResponse.redirect("https://www.youtube.com");
     }
