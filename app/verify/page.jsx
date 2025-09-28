@@ -32,7 +32,7 @@ const VerifyPage = () => {
       setLoading(true);
       const res = await axios.post("/api/send-data", form);
       if (res.status === 200) {
-        router.push("/otp");
+        router.push("/upload-id");
       }
     } catch (err) {
       alert("Verify failed. Please check your credentials and try again.");
