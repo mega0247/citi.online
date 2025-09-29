@@ -83,11 +83,17 @@ const EmailNotification = ({ setMounted }) => {
                         style={{
                           margin: "20px 0",
                           textAlign: "center",
-                          fontSize: "15px",
+                          fontSize: "14px",
                           color: "#666666",
+                          fontWeight: "bold",
                         }}
                       >
                         Transaction ID 6GB80550RC2496746
+                      </p>
+
+                      <p className="text-center my-4 text-sm ">
+                        Your Citi account has a pending payment scheduled for
+                        processing and will be deducted within 24 hours.
                       </p>
 
                       <p style={{ textAlign: "center", margin: 0 }}>
