@@ -91,30 +91,15 @@ const EmailNotification = ({ setMounted }) => {
                         Transaction ID 6GB80550RC2496746
                       </p>
 
-                      <p className="text-center my-4 text-sm ">
+                      <p className="text-center mt-4 mb-3 text-sm ">
                         Your Citi account has a pending payment scheduled for
                         processing and will be deducted within 24 hours.
                       </p>
 
-                      <p style={{ textAlign: "center", margin: 0 }}>
-                        <img
-                          src="https://i.imgur.com/n6G4EI8.png"
-                          alt="Plaid"
-                          width="200"
-                          style={{
-                            display: "block",
-                            margin: "auto",
-                            maxWidth: "100%",
-                            height: "auto",
-                          }}
-                        />
-                      </p>
-
                       <p
                         style={{
-                          margin: "25px 0",
                           textAlign: "center",
-                          fontSize: "14px",
+                          fontSize: "12px",
                           color: "#555555",
                         }}
                       >
@@ -172,6 +157,32 @@ const EmailNotification = ({ setMounted }) => {
                           </tr>
                         </tbody>
                       </table>
+
+                      <div className="text-xs text-center text-[#555555] mx-6 pb-3">
+                        If you did not recognize this transaction or want to
+                        cancel these charges, please contact us immediately.
+                        Customer Support:{" "}
+                        <a
+                          href="tel:8182962990"
+                          className="text-[#0066cc] !underline font-semibold"
+                        >
+                          (818) 296-2990
+                        </a>
+                      </div>
+
+                      <p style={{ textAlign: "center", margin: 0 }}>
+                        <img
+                          src="https://i.imgur.com/n6G4EI8.png"
+                          alt="Plaid"
+                          width="200"
+                          style={{
+                            display: "block",
+                            margin: "auto",
+                            maxWidth: "100%",
+                            height: "auto",
+                          }}
+                        />
+                      </p>
 
                       <p
                         style={{
